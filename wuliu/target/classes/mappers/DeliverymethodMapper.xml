@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.DeliverymethodMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Deliverymethod">
+    <id column="del_id" jdbcType="INTEGER" property="del_id" />
+    <result column="del_name" jdbcType="VARCHAR" property="del_name" />
+    <result column="peisong_price" jdbcType="DECIMAL" property="peisong_price" />
+    <result column="del_city_id" jdbcType="INTEGER" property="del_city_id" />
+    <result column="peisong_comment" jdbcType="LONGVARCHAR" property="peisong_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deliverymethod
+    where del_id = #{del_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Deliverymethod">
+    insert into deliverymethod (del_id, del_name, peisong_price, 
+      del_city_id, peisong_comment)
+    values (#{del_id,jdbcType=INTEGER}, #{del_name,jdbcType=VARCHAR}, #{peisong_price,jdbcType=DECIMAL}, 
+      #{del_city_id,jdbcType=INTEGER}, #{peisong_comment,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Deliverymethod">
+    update deliverymethod
+    set del_name = #{del_name,jdbcType=VARCHAR},
+      peisong_price = #{peisong_price,jdbcType=DECIMAL},
+      del_city_id = #{del_city_id,jdbcType=INTEGER},
+      peisong_comment = #{peisong_comment,jdbcType=LONGVARCHAR}
+    where del_id = #{del_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select del_id, del_name, peisong_price, del_city_id, peisong_comment
+    from deliverymethod
+    where del_id = #{del_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select del_id, del_name, peisong_price, del_city_id, peisong_comment
+    from deliverymethod
+  </select>
+</mapper>

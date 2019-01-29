@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.PeisongdianMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Peisongdian">
+    <id column="peisongdian_id" jdbcType="INTEGER" property="peisongdian_id" />
+    <result column="pei_province_id" jdbcType="INTEGER" property="pei_province_id" />
+    <result column="pei_city_id" jdbcType="INTEGER" property="pei_city_id" />
+    <result column="admin_id" jdbcType="INTEGER" property="admin_id" />
+    <result column="peisongdian_name" jdbcType="VARCHAR" property="peisongdian_name" />
+    <result column="peisongdian_tel" jdbcType="VARCHAR" property="peisongdian_tel" />
+    <result column="peisongdian_address" jdbcType="VARCHAR" property="peisongdian_address" />
+    <result column="peisongdian_comment" jdbcType="LONGVARCHAR" property="peisongdian_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from peisongdian
+    where peisongdian_id = #{peisongdian_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Peisongdian">
+    insert into peisongdian (peisongdian_id, pei_province_id, 
+      pei_city_id, admin_id, peisongdian_name, 
+      peisongdian_tel, peisongdian_address, peisongdian_comment
+      )
+    values (#{peisongdian_id,jdbcType=INTEGER}, #{pei_province_id,jdbcType=INTEGER}, 
+      #{pei_city_id,jdbcType=INTEGER}, #{admin_id,jdbcType=INTEGER}, #{peisongdian_name,jdbcType=VARCHAR}, 
+      #{peisongdian_tel,jdbcType=VARCHAR}, #{peisongdian_address,jdbcType=VARCHAR}, #{peisongdian_comment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Peisongdian">
+    update peisongdian
+    set pei_province_id = #{pei_province_id,jdbcType=INTEGER},
+      pei_city_id = #{pei_city_id,jdbcType=INTEGER},
+      admin_id = #{admin_id,jdbcType=INTEGER},
+      peisongdian_name = #{peisongdian_name,jdbcType=VARCHAR},
+      peisongdian_tel = #{peisongdian_tel,jdbcType=VARCHAR},
+      peisongdian_address = #{peisongdian_address,jdbcType=VARCHAR},
+      peisongdian_comment = #{peisongdian_comment,jdbcType=LONGVARCHAR}
+    where peisongdian_id = #{peisongdian_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select peisongdian_id, pei_province_id, pei_city_id, admin_id, peisongdian_name, 
+    peisongdian_tel, peisongdian_address, peisongdian_comment
+    from peisongdian
+    where peisongdian_id = #{peisongdian_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select peisongdian_id, pei_province_id, pei_city_id, admin_id, peisongdian_name, 
+    peisongdian_tel, peisongdian_address, peisongdian_comment
+    from peisongdian
+  </select>
+</mapper>

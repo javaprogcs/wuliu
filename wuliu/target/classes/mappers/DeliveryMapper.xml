@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.DeliveryMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Delivery">
+    <id column="delivery_id" jdbcType="INTEGER" property="delivery_id" />
+    <result column="start_city" jdbcType="VARCHAR" property="start_city" />
+    <result column="midpoint_city" jdbcType="VARCHAR" property="midpoint_city" />
+    <result column="destination_city" jdbcType="VARCHAR" property="destination_city" />
+    <result column="delivery_state" jdbcType="VARCHAR" property="delivery_state" />
+    <result column="rise_time" jdbcType="TIMESTAMP" property="rise_time" />
+    <result column="delivery_comment" jdbcType="LONGVARCHAR" property="delivery_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from delivery
+    where delivery_id = #{delivery_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Delivery">
+    insert into delivery (delivery_id, start_city, midpoint_city, 
+      destination_city, delivery_state, rise_time, 
+      delivery_comment)
+    values (#{delivery_id,jdbcType=INTEGER}, #{start_city,jdbcType=VARCHAR}, #{midpoint_city,jdbcType=VARCHAR}, 
+      #{destination_city,jdbcType=VARCHAR}, #{delivery_state,jdbcType=VARCHAR}, #{rise_time,jdbcType=TIMESTAMP}, 
+      #{delivery_comment,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Delivery">
+    update delivery
+    set start_city = #{start_city,jdbcType=VARCHAR},
+      midpoint_city = #{midpoint_city,jdbcType=VARCHAR},
+      destination_city = #{destination_city,jdbcType=VARCHAR},
+      delivery_state = #{delivery_state,jdbcType=VARCHAR},
+      rise_time = #{rise_time,jdbcType=TIMESTAMP},
+      delivery_comment = #{delivery_comment,jdbcType=LONGVARCHAR}
+    where delivery_id = #{delivery_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select delivery_id, start_city, midpoint_city, destination_city, delivery_state, 
+    rise_time, delivery_comment
+    from delivery
+    where delivery_id = #{delivery_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select delivery_id, start_city, midpoint_city, destination_city, delivery_state, 
+    rise_time, delivery_comment
+    from delivery
+  </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.VehicleMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Vehicle">
+    <id column="vehicle_id" jdbcType="INTEGER" property="vehicle_id" />
+    <result column="route_id" jdbcType="INTEGER" property="route_id" />
+    <result column="vehicle_type" jdbcType="VARCHAR" property="vehicle_type" />
+    <result column="yieldly" jdbcType="VARCHAR" property="yieldly" />
+    <result column="production_date" jdbcType="TIMESTAMP" property="production_date" />
+    <result column="buy_date" jdbcType="TIMESTAMP" property="buy_date" />
+    <result column="vehicle_comment" jdbcType="LONGVARCHAR" property="vehicle_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from vehicle
+    where vehicle_id = #{vehicle_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Vehicle">
+    insert into vehicle (vehicle_id, route_id, vehicle_type, 
+      yieldly, production_date, buy_date, 
+      vehicle_comment)
+    values (#{vehicle_id,jdbcType=INTEGER}, #{route_id,jdbcType=INTEGER}, #{vehicle_type,jdbcType=VARCHAR}, 
+      #{yieldly,jdbcType=VARCHAR}, #{production_date,jdbcType=TIMESTAMP}, #{buy_date,jdbcType=TIMESTAMP}, 
+      #{vehicle_comment,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Vehicle">
+    update vehicle
+    set route_id = #{route_id,jdbcType=INTEGER},
+      vehicle_type = #{vehicle_type,jdbcType=VARCHAR},
+      yieldly = #{yieldly,jdbcType=VARCHAR},
+      production_date = #{production_date,jdbcType=TIMESTAMP},
+      buy_date = #{buy_date,jdbcType=TIMESTAMP},
+      vehicle_comment = #{vehicle_comment,jdbcType=LONGVARCHAR}
+    where vehicle_id = #{vehicle_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select vehicle_id, route_id, vehicle_type, yieldly, production_date, buy_date, vehicle_comment
+    from vehicle
+    where vehicle_id = #{vehicle_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select vehicle_id, route_id, vehicle_type, yieldly, production_date, buy_date, vehicle_comment
+    from vehicle
+  </select>
+</mapper>

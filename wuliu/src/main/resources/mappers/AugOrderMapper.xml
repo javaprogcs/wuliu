@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.AugOrderMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.AugOrder">
+    <id column="order_id" jdbcType="INTEGER" property="order_id" />
+    <result column="delivery_id" jdbcType="INTEGER" property="delivery_id" />
+    <result column="order_type" jdbcType="VARCHAR" property="order_type" />
+    <result column="cargo_name" jdbcType="VARCHAR" property="cargo_name" />
+    <result column="cargo_weight" jdbcType="DOUBLE" property="cargo_weight" />
+    <result column="sender_name" jdbcType="VARCHAR" property="sender_name" />
+    <result column="sender_address" jdbcType="VARCHAR" property="sender_address" />
+    <result column="delivery_address" jdbcType="VARCHAR" property="delivery_address" />
+    <result column="order_state" jdbcType="VARCHAR" property="order_state" />
+    <result column="sender_tel" jdbcType="VARCHAR" property="sender_tel" />
+    <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+    <result column="consignee_tel" jdbcType="VARCHAR" property="consignee_tel" />
+    <result column="start_city" jdbcType="VARCHAR" property="start_city" />
+    <result column="midpoint_city" jdbcType="VARCHAR" property="midpoint_city" />
+    <result column="destination_city" jdbcType="VARCHAR" property="destination_city" />
+    <result column="transport_price" jdbcType="DECIMAL" property="transport_price" />
+    <result column="delivery_price" jdbcType="DECIMAL" property="delivery_price" />
+    <result column="carriage_price" jdbcType="DECIMAL" property="carriage_price" />
+    <result column="total_price" jdbcType="DECIMAL" property="total_price" />
+    <result column="vehicle" jdbcType="VARCHAR" property="vehicle" />
+    <result column="order_comment" jdbcType="LONGVARCHAR" property="order_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from aug_order
+    where order_id = #{order_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.AugOrder">
+    insert into aug_order (order_id, delivery_id, order_type, 
+      cargo_name, cargo_weight, sender_name, 
+      sender_address, delivery_address, order_state, 
+      sender_tel, consignee, consignee_tel, 
+      start_city, midpoint_city, destination_city, 
+      transport_price, delivery_price, carriage_price, 
+      total_price, vehicle, order_comment
+      )
+    values (#{order_id,jdbcType=INTEGER}, #{delivery_id,jdbcType=INTEGER}, #{order_type,jdbcType=VARCHAR}, 
+      #{cargo_name,jdbcType=VARCHAR}, #{cargo_weight,jdbcType=DOUBLE}, #{sender_name,jdbcType=VARCHAR}, 
+      #{sender_address,jdbcType=VARCHAR}, #{delivery_address,jdbcType=VARCHAR}, #{order_state,jdbcType=VARCHAR}, 
+      #{sender_tel,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, #{consignee_tel,jdbcType=VARCHAR}, 
+      #{start_city,jdbcType=VARCHAR}, #{midpoint_city,jdbcType=VARCHAR}, #{destination_city,jdbcType=VARCHAR}, 
+      #{transport_price,jdbcType=DECIMAL}, #{delivery_price,jdbcType=DECIMAL}, #{carriage_price,jdbcType=DECIMAL}, 
+      #{total_price,jdbcType=DECIMAL}, #{vehicle,jdbcType=VARCHAR}, #{order_comment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.AugOrder">
+    update aug_order
+    set delivery_id = #{delivery_id,jdbcType=INTEGER},
+      order_type = #{order_type,jdbcType=VARCHAR},
+      cargo_name = #{cargo_name,jdbcType=VARCHAR},
+      cargo_weight = #{cargo_weight,jdbcType=DOUBLE},
+      sender_name = #{sender_name,jdbcType=VARCHAR},
+      sender_address = #{sender_address,jdbcType=VARCHAR},
+      delivery_address = #{delivery_address,jdbcType=VARCHAR},
+      order_state = #{order_state,jdbcType=VARCHAR},
+      sender_tel = #{sender_tel,jdbcType=VARCHAR},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      consignee_tel = #{consignee_tel,jdbcType=VARCHAR},
+      start_city = #{start_city,jdbcType=VARCHAR},
+      midpoint_city = #{midpoint_city,jdbcType=VARCHAR},
+      destination_city = #{destination_city,jdbcType=VARCHAR},
+      transport_price = #{transport_price,jdbcType=DECIMAL},
+      delivery_price = #{delivery_price,jdbcType=DECIMAL},
+      carriage_price = #{carriage_price,jdbcType=DECIMAL},
+      total_price = #{total_price,jdbcType=DECIMAL},
+      vehicle = #{vehicle,jdbcType=VARCHAR},
+      order_comment = #{order_comment,jdbcType=LONGVARCHAR}
+    where order_id = #{order_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select order_id, delivery_id, order_type, cargo_name, cargo_weight, sender_name, 
+    sender_address, delivery_address, order_state, sender_tel, consignee, consignee_tel, 
+    start_city, midpoint_city, destination_city, transport_price, delivery_price, carriage_price, 
+    total_price, vehicle, order_comment
+    from aug_order
+    where order_id = #{order_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select order_id, delivery_id, order_type, cargo_name, cargo_weight, sender_name, 
+    sender_address, delivery_address, order_state, sender_tel, consignee, consignee_tel, 
+    start_city, midpoint_city, destination_city, transport_price, delivery_price, carriage_price, 
+    total_price, vehicle, order_comment
+    from aug_order
+  </select>
+</mapper>

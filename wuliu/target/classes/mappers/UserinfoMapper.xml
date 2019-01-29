@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.UserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Userinfo">
+    <id column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_name" jdbcType="VARCHAR" property="user_name" />
+    <result column="user_comment" jdbcType="LONGVARCHAR" property="user_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from userinfo
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Userinfo">
+    insert into userinfo (user_id, user_name, user_comment
+      )
+    values (#{user_id,jdbcType=INTEGER}, #{user_name,jdbcType=VARCHAR}, #{user_comment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Userinfo">
+    update userinfo
+    set user_name = #{user_name,jdbcType=VARCHAR},
+      user_comment = #{user_comment,jdbcType=LONGVARCHAR}
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select user_id, user_name, user_comment
+    from userinfo
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, user_name, user_comment
+    from userinfo
+  </select>
+</mapper>

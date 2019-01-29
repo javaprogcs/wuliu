@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Customer">
+    <id column="cust_id" jdbcType="INTEGER" property="cust_id" />
+    <result column="cust_name" jdbcType="VARCHAR" property="cust_name" />
+    <result column="cust_sex" jdbcType="VARCHAR" property="cust_sex" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="cust_pwd" jdbcType="VARCHAR" property="cust_pwd" />
+    <result column="cust_tel" jdbcType="VARCHAR" property="cust_tel" />
+    <result column="cust_birthdate" jdbcType="TIMESTAMP" property="cust_birthdate" />
+    <result column="cust_address" jdbcType="VARCHAR" property="cust_address" />
+    <result column="cust_comment" jdbcType="LONGVARCHAR" property="cust_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where cust_id = #{cust_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Customer">
+    insert into customer (cust_id, cust_name, cust_sex, 
+      user_id, cust_pwd, cust_tel, 
+      cust_birthdate, cust_address, cust_comment
+      )
+    values (#{cust_id,jdbcType=INTEGER}, #{cust_name,jdbcType=VARCHAR}, #{cust_sex,jdbcType=VARCHAR}, 
+      #{user_id,jdbcType=INTEGER}, #{cust_pwd,jdbcType=VARCHAR}, #{cust_tel,jdbcType=VARCHAR}, 
+      #{cust_birthdate,jdbcType=TIMESTAMP}, #{cust_address,jdbcType=VARCHAR}, #{cust_comment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Customer">
+    update customer
+    set cust_name = #{cust_name,jdbcType=VARCHAR},
+      cust_sex = #{cust_sex,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=INTEGER},
+      cust_pwd = #{cust_pwd,jdbcType=VARCHAR},
+      cust_tel = #{cust_tel,jdbcType=VARCHAR},
+      cust_birthdate = #{cust_birthdate,jdbcType=TIMESTAMP},
+      cust_address = #{cust_address,jdbcType=VARCHAR},
+      cust_comment = #{cust_comment,jdbcType=LONGVARCHAR}
+    where cust_id = #{cust_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select cust_id, cust_name, cust_sex, user_id, cust_pwd, cust_tel, cust_birthdate, 
+    cust_address, cust_comment
+    from customer
+    where cust_id = #{cust_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select cust_id, cust_name, cust_sex, user_id, cust_pwd, cust_tel, cust_birthdate, 
+    cust_address, cust_comment
+    from customer
+  </select>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.RouteMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.Route">
+    <id column="route_id" jdbcType="INTEGER" property="route_id" />
+    <result column="route_name" jdbcType="VARCHAR" property="route_name" />
+    <result column="start_district_id" jdbcType="INTEGER" property="start_district_id" />
+    <result column="start_city_id" jdbcType="INTEGER" property="start_city_id" />
+    <result column="midpoint_district_id" jdbcType="VARCHAR" property="midpoint_district_id" />
+    <result column="midpoint_city_id" jdbcType="VARCHAR" property="midpoint_city_id" />
+    <result column="destination_district_id" jdbcType="VARCHAR" property="destination_district_id" />
+    <result column="destination_city_id" jdbcType="VARCHAR" property="destination_city_id" />
+    <result column="carriage_price" jdbcType="DECIMAL" property="carriage_price" />
+    <result column="route_comment" jdbcType="LONGVARCHAR" property="route_comment" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from route
+    where route_id = #{route_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.Route">
+    insert into route (route_id, route_name, start_district_id, 
+      start_city_id, midpoint_district_id, midpoint_city_id, 
+      destination_district_id, destination_city_id, 
+      carriage_price, route_comment)
+    values (#{route_id,jdbcType=INTEGER}, #{route_name,jdbcType=VARCHAR}, #{start_district_id,jdbcType=INTEGER}, 
+      #{start_city_id,jdbcType=INTEGER}, #{midpoint_district_id,jdbcType=VARCHAR}, #{midpoint_city_id,jdbcType=VARCHAR}, 
+      #{destination_district_id,jdbcType=VARCHAR}, #{destination_city_id,jdbcType=VARCHAR}, 
+      #{carriage_price,jdbcType=DECIMAL}, #{route_comment,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.Route">
+    update route
+    set route_name = #{route_name,jdbcType=VARCHAR},
+      start_district_id = #{start_district_id,jdbcType=INTEGER},
+      start_city_id = #{start_city_id,jdbcType=INTEGER},
+      midpoint_district_id = #{midpoint_district_id,jdbcType=VARCHAR},
+      midpoint_city_id = #{midpoint_city_id,jdbcType=VARCHAR},
+      destination_district_id = #{destination_district_id,jdbcType=VARCHAR},
+      destination_city_id = #{destination_city_id,jdbcType=VARCHAR},
+      carriage_price = #{carriage_price,jdbcType=DECIMAL},
+      route_comment = #{route_comment,jdbcType=LONGVARCHAR}
+    where route_id = #{route_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select route_id, route_name, start_district_id, start_city_id, midpoint_district_id, 
+    midpoint_city_id, destination_district_id, destination_city_id, carriage_price, route_comment
+    from route
+    where route_id = #{route_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select route_id, route_name, start_district_id, start_city_id, midpoint_district_id, 
+    midpoint_city_id, destination_district_id, destination_city_id, carriage_price, route_comment
+    from route
+  </select>
+</mapper>

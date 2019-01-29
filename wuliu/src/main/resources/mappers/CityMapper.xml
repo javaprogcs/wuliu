@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csw.dao.CityMapper">
+  <resultMap id="BaseResultMap" type="com.csw.entity.City">
+    <id column="city_id" jdbcType="INTEGER" property="city_id" />
+    <result column="province_id" jdbcType="INTEGER" property="province_id" />
+    <result column="district_id" jdbcType="INTEGER" property="district_id" />
+    <result column="pei_city_id" jdbcType="INTEGER" property="pei_city_id" />
+    <result column="city_name" jdbcType="VARCHAR" property="city_name" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from city
+    where city_id = #{city_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.csw.entity.City">
+    insert into city (city_id, province_id, district_id, 
+      pei_city_id, city_name)
+    values (#{city_id,jdbcType=INTEGER}, #{province_id,jdbcType=INTEGER}, #{district_id,jdbcType=INTEGER}, 
+      #{pei_city_id,jdbcType=INTEGER}, #{city_name,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.csw.entity.City">
+    update city
+    set province_id = #{province_id,jdbcType=INTEGER},
+      district_id = #{district_id,jdbcType=INTEGER},
+      pei_city_id = #{pei_city_id,jdbcType=INTEGER},
+      city_name = #{city_name,jdbcType=VARCHAR}
+    where city_id = #{city_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select city_id, province_id, district_id, pei_city_id, city_name
+    from city
+    where city_id = #{city_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select city_id, province_id, district_id, pei_city_id, city_name
+    from city
+  </select>
+</mapper>
